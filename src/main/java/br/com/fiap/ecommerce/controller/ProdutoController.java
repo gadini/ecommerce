@@ -29,8 +29,12 @@ public class ProdutoController {
     @GetMapping
     public List<ProdutoResponseDto> list(){
 
-        List<Produto> produtos = produtoService.list();
-        return null;
+        List<ProdutoResponseDto> dtos = produtoService.list()
+        .stream()
+        .map(e -> new ProdutoResponseDto().toDto(e))
+        .toList();
+
+        return dtos;
     }
 
     @PostMapping
